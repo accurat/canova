@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -39,11 +39,11 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.9.1",
+    "np": "*",
     "size-limit": "^4.9.1",
     "tsdx": "^0.14.1",
     "tslib": "^2.0.3",
-    "typescript": "^4.1.3",
-    "np": "*"
+    "typescript": "^4.1.3"
   },
   "np": {
     "yarn": true,
