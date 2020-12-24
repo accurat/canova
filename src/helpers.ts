@@ -2,6 +2,8 @@ import {
   CircleElement,
   CircleOptions,
   DrawNode,
+  EllipseElement,
+  EllipseOptions,
   GradientStop,
   GroupElement,
   GroupOptions,
@@ -21,6 +23,10 @@ export function rect(options: RectOptions): RectElement {
 
 export function circle(options: CircleOptions): CircleElement {
   return { type: 'circle', ...options }
+}
+
+export function ellipse(options: EllipseOptions): EllipseElement {
+  return { type: 'ellipse', ...options }
 }
 
 export function group(options: GroupOptions, children: DrawNode[]): GroupElement {

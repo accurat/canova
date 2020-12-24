@@ -56,6 +56,18 @@ export interface CircleElement extends CircleOptions {
   type: 'circle'
 }
 
+export interface EllipseOptions extends StyleOptions {
+  cx?: number
+  cy?: number
+  rx?: number
+  ry?: number
+  rotate?: number
+}
+
+export interface EllipseElement extends EllipseOptions {
+  type: 'ellipse'
+}
+
 export interface RectOptions extends StyleOptions {
   x?: number
   y?: number
@@ -75,6 +87,6 @@ export interface PathElement extends PathOptions {
   type: 'path'
 }
 
-export type DrawElement = RectElement | GroupElement | CircleElement | PathElement
+export type DrawElement = RectElement | GroupElement | CircleElement | PathElement | EllipseElement
 
 export type DrawNode = DrawElement | ((ctx: CanvasRenderingContext2D) => void) | false

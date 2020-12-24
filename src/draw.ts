@@ -6,6 +6,7 @@ import {
   GroupElement,
   PathElement,
   RectElement,
+  EllipseElement,
 } from './types'
 
 // cache
@@ -40,10 +41,11 @@ function drawNode(ctx: CanvasRenderingContext2D, el: DrawNode | DrawNode[]) {
 function drawElement(ctx: CanvasRenderingContext2D, element: DrawElement) {
   // prettier-ignore
   switch (element.type) {
-    case 'circle':  drawCircle(ctx, element); break;
-    case   'rect':  drawRect(ctx, element);   break;
-    case  'group':  drawGroup(ctx, element);  break;
-    case   'path':  drawPath(ctx, element);   break;
+    case  'circle':  drawCircle(ctx, element);  break;
+    case 'ellipse':  drawEllipse(ctx, element); break;
+    case    'rect':  drawRect(ctx, element);    break;
+    case   'group':  drawGroup(ctx, element);   break;
+    case    'path':  drawPath(ctx, element);    break;
     default:
       throw new Error(`Element type not recognized. Type: ${((element as any).type)}`);
   }
@@ -61,12 +63,20 @@ function drawCircle(ctx: CanvasRenderingContext2D, circle: CircleElement) {
   setStyle(ctx, circle)
 
   ctx.beginPath()
-  // use ellipse instead?
-  // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse
-  // ctx.ellipse(cx, cy, r, r, 0, 0, TWO_PI)
   ctx.arc(cx, cy, r, 0, TWO_PI)
 
   drawStyle(ctx, circle)
+}
+
+function drawEllipse(ctx: CanvasRenderingContext2D, ellipse: EllipseElement) {
+  const { cx = 0, cy = 0, rx = 1, ry = 1, rotate = 0 } = ellipse
+
+  setStyle(ctx, ellipse)
+
+  ctx.beginPath()
+  ctx.ellipse(cx, cy, rx, ry, rotate, 0, TWO_PI)
+
+  drawStyle(ctx, ellipse)
 }
 
 function drawRect(ctx: CanvasRenderingContext2D, rect: RectElement) {

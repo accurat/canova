@@ -1,5 +1,14 @@
 import React from 'react'
-import draw, { rect, group, circle, linearGradient, radialGradient, path } from '../../../src'
+import {
+  draw,
+  rect,
+  group,
+  circle,
+  linearGradient,
+  radialGradient,
+  path,
+  ellipse,
+} from '../../../src'
 
 export const App = () => {
   const ref = React.useRef<HTMLCanvasElement>(null)
@@ -46,6 +55,22 @@ export const App = () => {
           }),
         ]),
       ])
+    )
+
+    draw(
+      canvas,
+      ['#f00', '#0f0', '#00f'].map((color, i) =>
+        ellipse({
+          cx: 400,
+          cy: 300,
+          rx: 50,
+          ry: 55,
+          fill: color,
+          strokeWidth: 10,
+          blend: 'lighter',
+          rotate: i * Math.PI * (2 / 3),
+        })
+      )
     )
   }, [])
 

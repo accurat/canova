@@ -26,6 +26,11 @@
   "contributors": [
     "Ivan Rossi <ivanross.me@gmail.com> (https://github.com/ivanross)"
   ],
+  "homepage": "https://github.com/accurat/canova",
+  "repository": {
+    "type" : "git",
+    "url": "https://github.com/accurat/canova.git"
+  },
   "module": "dist/canova.esm.js",
   "size-limit": [
     {
