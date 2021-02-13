@@ -37,26 +37,22 @@ export interface RadialGradient extends RadialGradientOptions {
   stops: GradientStop[]
 }
 
-export interface GroupOptions {
+export interface GroupElement {
+  type: 'group'
   x?: number
   y?: number
-}
-export interface GroupElement extends GroupOptions {
-  type: 'group'
   children: DrawNode[]
 }
 
-export interface CircleOptions extends StyleOptions {
+export interface CircleElement extends StyleOptions {
+  type: 'circle'
   cx?: number
   cy?: number
   r?: number
 }
 
-export interface CircleElement extends CircleOptions {
-  type: 'circle'
-}
-
-export interface EllipseOptions extends StyleOptions {
+export interface EllipseElement extends StyleOptions {
+  type: 'ellipse'
   cx?: number
   cy?: number
   rx?: number
@@ -64,27 +60,17 @@ export interface EllipseOptions extends StyleOptions {
   rotate?: number
 }
 
-export interface EllipseElement extends EllipseOptions {
-  type: 'ellipse'
-}
-
-export interface RectOptions extends StyleOptions {
+export interface RectElement extends StyleOptions {
+  type: 'rect'
   x?: number
   y?: number
   width?: number
   height?: number
 }
 
-export interface RectElement extends RectOptions {
-  type: 'rect'
-}
-
-export interface PathOptions extends StyleOptions {
-  d: string
-}
-
-export interface PathElement extends PathOptions {
+export interface PathElement extends StyleOptions {
   type: 'path'
+  d: string
 }
 
 export type DrawElement = RectElement | GroupElement | CircleElement | PathElement | EllipseElement

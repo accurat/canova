@@ -2,6 +2,8 @@ import React from 'react'
 import {
   draw,
   rect,
+  rectCorners,
+  rectCenter,
   group,
   circle,
   linearGradient,
@@ -37,18 +39,17 @@ export const App = () => {
     draw(
       canvas,
       group({ x: 20, y: 100 }, [
-        rect({ x: 0, y: 0, width: 100, height: 10, fill: 'red' }),
+        rect(0, 0, 100, 10, { fill: 'red' }),
         group({ x: 200, y: 200 }, [
-          circle({ cx: 200, cy: 200, r: 40, fill: gradient1 }),
-          rect({ x: 0, y: 10, width: 10, height: 40, fill: 'orange' }),
-          circle({ cx: 0, cy: 10, r: 10, fill: 'green' }),
+          circle(200, 200, 40, { fill: gradient1 }),
+          rect(0, 10, 10, 40, { fill: 'orange' }),
+          circle(0, 10, 10, { fill: 'green' }),
         ]),
         group({ x: 120, y: 20 }, [
-          circle({ r: 20, fill: 'red', opacity: 0.4 }),
-          rect({ y: 10, width: 40, height: 40, fill: 'orange' }),
-          rect({ width: 140, height: 300, stroke: gradient2, strokeWidth: 10 }),
-          path({
-            d: 'M100 -30 h 80 v 80 h -50 Z',
+          circle(0, 0, 20, { fill: 'red', opacity: 0.4 }),
+          rect(0, 10, 40, 40, { fill: 'orange' }),
+          rect(0, 0, 140, 300, { stroke: gradient2, strokeWidth: 10 }),
+          path('M100 -30 h 80 v 80 h -50 Z', {
             blend: 'xor',
             strokeWidth: 4,
             fill: gradient3,
@@ -60,17 +61,24 @@ export const App = () => {
     draw(
       canvas,
       ['#f00', '#0f0', '#00f'].map((color, i) =>
-        ellipse({
-          cx: 400,
-          cy: 300,
-          rx: 50,
-          ry: 55,
+        ellipse(400, 300, 50, 55, {
           fill: color,
           strokeWidth: 10,
           blend: 'lighter',
           rotate: i * Math.PI * (2 / 3),
         })
       )
+    )
+
+    draw(
+      canvas,
+      group({ x: 500, y: 100 }, [
+        rect(0, 0, 300, 300, { stroke: 'black', opacity: 1 }),
+        rect(20, 20, 110, 110, { fill: 'red', opacity: 0.4 }),
+        rectCorners(20, 20, 110, 110, { fill: 'blue', opacity: 0.4 }),
+        rectCenter(20, 20, 110, 110, { fill: 'green', opacity: 0.4 }),
+        circle(20, 20, 3, { fill: 'red' }),
+      ])
     )
   }, [])
 

@@ -1,36 +1,85 @@
 import {
   CircleElement,
-  CircleOptions,
+  DrawElement,
   DrawNode,
   EllipseElement,
-  EllipseOptions,
   GradientStop,
   GroupElement,
-  GroupOptions,
   LinearGradient,
   LinearGradientOptions,
   PathElement,
-  PathOptions,
   RadialGradient,
   RadialGradientOptions,
   RectElement,
-  RectOptions,
 } from './types'
 
-export function rect(options: RectOptions): RectElement {
-  return { type: 'rect', ...options }
+type Options<Element extends DrawElement, Keys extends keyof Element> = Omit<Element, 'type' | Keys>
+
+export type RectOptions = Options<RectElement, 'x' | 'y' | 'width' | 'height'>
+export function rect(
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  options: RectOptions = {}
+): RectElement {
+  return { type: 'rect', ...options, x, y, width, height }
 }
 
-export function circle(options: CircleOptions): CircleElement {
-  return { type: 'circle', ...options }
+export function rectCorners(
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  options: RectOptions = {}
+): RectElement {
+  const x = Math.min(x1, x2)
+  const y = Math.min(y1, y2)
+  const width = Math.abs(x2 - x1)
+  const height = Math.abs(y2 - y1)
+  return rect(x, y, width, height, options)
+}
+export function rectCenter(
+  cx: number,
+  cy: number,
+  width: number,
+  height: number,
+  options: RectOptions = {}
+): RectElement {
+  const x = cx - width / 2
+  const y = cy - height / 2
+  return rect(x, y, width, height, options)
 }
 
-export function ellipse(options: EllipseOptions): EllipseElement {
-  return { type: 'ellipse', ...options }
+type CircleOptions = Options<CircleElement, 'cx' | 'cy' | 'r'>
+export function circle(
+  cx: number,
+  cy: number,
+  r: number,
+  options: CircleOptions = {}
+): CircleElement {
+  return { type: 'circle', ...options, cx, cy, r }
 }
 
+type EllipseOptions = Options<EllipseElement, 'cx' | 'cy' | 'rx' | 'ry'>
+export function ellipse(
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  options: EllipseOptions = {}
+): EllipseElement {
+  return { type: 'ellipse', ...options, cx, cy, rx, ry }
+}
+
+type GroupOptions = Options<GroupElement, 'children'>
 export function group(options: GroupOptions, children: DrawNode[]): GroupElement {
   return { type: 'group', ...options, children }
+}
+
+type PathOptions = Options<PathElement, 'd'>
+export function path(d: PathElement['d'], options: PathOptions = {}): PathElement {
+  return { type: 'path', ...options, d }
 }
 
 export function linearGradient(
@@ -45,8 +94,4 @@ export function radialGradient(
   stops: GradientStop[]
 ): RadialGradient {
   return { gradient: 'radial', ...options, stops }
-}
-
-export function path(options: PathOptions): PathElement {
-  return { type: 'path', ...options }
 }
