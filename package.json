@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   ],
   "homepage": "https://github.com/accurat/canova",
   "repository": {
-    "type" : "git",
+    "type": "git",
     "url": "https://github.com/accurat/canova.git"
   },
   "module": "dist/canova.esm.js",
